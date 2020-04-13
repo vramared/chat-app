@@ -7,4 +7,5 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
+console.log(process.env['PORT'] + "Is the port name");
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
