@@ -4,7 +4,8 @@
   "description": "A simple app to learn MEAN tech stack.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/vramared/mean#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.9.9",
     "nodemon": "^2.0.3"
   },
   "engines": {
