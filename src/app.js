@@ -1,12 +1,17 @@
 var express = require('express');
 var app = express();
 
-require('./db/mongoose.js');
+require('./db/mongoose');
+const auth = require('./auth/login');
 
 var port = process.env.PORT || 3000;
 
-app.get('/', function(req, res) {
+app.use(express.json());
+
+app.use(auth);
+
+app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));

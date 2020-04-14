@@ -7,15 +7,6 @@ const UserSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    age: {
-        type: Number,
-        default: 0,
-        validate(value) {
-            if (value < 0) {
-                throw new Error('Age must be a positive number')
-            }
-        }
-    },
     email: {
         type: String,
         required: true,
@@ -44,11 +35,7 @@ const UserSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    }],
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    }]
 });
 
 const User = mongoose.model('User', UserSchema);
