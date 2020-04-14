@@ -1,2 +1,2 @@
 web: npm install
-web: nodemon app.js
+web: npm start
