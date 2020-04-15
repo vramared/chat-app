@@ -3,9 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-var user = process.env.MONGO_USER;
-var pw = process.env.MONGO_PW;
-const uri = `mongodb+srv://${user}:${pw}@cluster0-kiltc.mongodb.net/test?retryWrites=true&w=majority`;
+const uri = process.env.DB_CONFIG;
 
 const client = new MongoClient(uri, {
     useNewUrlParser: true,
