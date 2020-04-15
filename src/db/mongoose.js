@@ -1,4 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 var user = process.env.MONGO_USER;
 var pw = process.env.MONGO_PW;
