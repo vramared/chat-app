@@ -17,7 +17,6 @@ const UserSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minlength: 8,
-        maxlength: 32
     },
     tokens: [{
         token: {
