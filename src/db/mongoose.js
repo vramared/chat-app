@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-if(process.env.NODE_ENV == "dev") {
+if (process.env.NODE_ENV == "dev") {
     require('dotenv').config();
 }
 

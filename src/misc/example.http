@@ -1,21 +1,29 @@
+### valid email
 POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "name": "Bobby",
-    "email": "bobby@gmail.com",
+    "name": "Ace Ventura",
+    "email": "acevent@gmail.com",
     "password": "password"
 }
 
-###
-GET http://localhost:3000/login
+### invalid email
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "name": "Johnny Appleseed",
+    "email": "appleseed",
+    "password": "password"
+}
 
 ###
 POST https://web-app-liverton.herokuapp.com/signup
 Content-Type: application/json
 
 {
-    "name": "Bobby",
-    "email": "bobby@gmail.com",
+    "name": "Mark Ronson",
+    "email": "markothy@gmail.com",
     "password": "password"
 }

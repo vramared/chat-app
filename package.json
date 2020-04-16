@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/vramared/mean#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "mongoose": "^5.9.9",
-    "nodemon": "^2.0.3",
-    "validator": "^13.0.0"
+    "nodemon": "^2.0.3"
   },
   "engines": {
     "node": "12.x"
