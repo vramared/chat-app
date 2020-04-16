@@ -4,7 +4,6 @@ if(process.env.NODE_ENV == "dev") {
 }
 
 // Connect to DB
-console.log(process.env.DB_CONFIG);
 mongoose.connect(process.env.DB_CONFIG, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

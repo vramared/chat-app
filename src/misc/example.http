@@ -9,3 +9,13 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/login
+
+###
+POST https://web-app-liverton.herokuapp.com/signup
+Content-Type: application/json
+
+{
+    "name": "Bobby",
+    "email": "bobby@gmail.com",
+    "password": "password"
+}
