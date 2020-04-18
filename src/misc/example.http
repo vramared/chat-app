@@ -38,5 +38,14 @@ Content-Type: application/json
 
 {
     "email": "aceventura@gmail.com",
+    "password": "password"
+}
+
+### email does not exist
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "reqres@gmail.com",
     "password": "passsdord"
 }

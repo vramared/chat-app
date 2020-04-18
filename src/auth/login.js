@@ -1,10 +1,17 @@
 const bcrypt = require('bcryptjs');
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = new express.Router();
 const { validateSignup, validateLogin } = require('./validation');
 const User = require('../model/user');
 
 const saltRounds = 10;
+
+const httpResp = {
+    userDNE: "User does not exist",
+    loginSucess: "Login Succeeded",
+    loginFail: "Login Unsuccesful"
+};
 
 var genHash = async function(password) {
     const salt = await bcrypt.genSalt(saltRounds);
@@ -16,9 +23,15 @@ router.post('/login', async (req, res) => {
     const error = validateLogin(req.body)
     if (error) return res.status(400).send(error.details[0].message);
     const userDB = await User.findOne({ email: req.body.email });
+    if (!userDB) return res.status(400).send(httpResp.userDNE);
     const match = await bcrypt.compare(req.body.password, userDB.password);
-    if (match) return res.send("Login Succeeded");
-    res.status(400).send("Login Unsuccessful");
+    if (!match) return res.status(400).send(httpResp.loginFail);
+    const token = jwt.sign({ _id: userDB.id }, process.env.TOKEN_SECRET);
+    res.header('auth-token', token);
+    res.send(JSON.stringify({
+        token: token,
+        msg: httpResp.loginSucess
+    }));
 });
 
 router.post('/signup', async (req, res) => {
