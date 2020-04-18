@@ -1,10 +1,12 @@
+### SIGNUPS
+
 ### valid email
 POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
     "name": "Ace Ventura",
-    "email": "acevent@gmail.com",
+    "email": "aceventura@gmail.com",
     "password": "password"
 }
 
@@ -26,4 +28,15 @@ Content-Type: application/json
     "name": "Mark Ronson",
     "email": "markothy@gmail.com",
     "password": "password"
+}
+
+### LOGINS
+
+### valid email
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "aceventura@gmail.com",
+    "password": "passsdord"
 }
