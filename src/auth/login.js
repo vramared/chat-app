@@ -14,16 +14,16 @@ var genHash = async function(password) {
 
 router.post('/login', async (req, res) => {
     const error = validateLogin(req.body)
-    if(error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send(error.details[0].message);
     const userDB = await User.findOne({ email: req.body.email });
     const match = await bcrypt.compare(req.body.password, userDB.password);
-    if(match) return res.send("Login Succeeded");
+    if (match) return res.send("Login Succeeded");
     res.status(400).send("Login Unsuccessful");
 });
 
 router.post('/signup', async (req, res) => {
     const error = validateSignup(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send(error.details[0].message);
     const user = new User({
         name: req.body.name,
         email: req.body.email,
