@@ -2,8 +2,8 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = new express.Router();
-const { validateSignup, validateLogin } = require('./validation');
-const User = require('../model/user');
+const { validateSignup, validateLogin } = require('../auth/validation');
+const User = require('../models/user');
 
 const saltRounds = 10;
 

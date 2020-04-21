@@ -49,3 +49,10 @@ Content-Type: application/json
     "email": "reqres@gmail.com",
     "password": "passsdord"
 }
+
+### validated GET
+GET http://localhost:3000/chat
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTlhOWMzMmRmNmNhNDBmMDc4NDZjZmUiLCJpYXQiOjE1ODczNTI2MTl9.mqGo_UTSSqflQiG-DTlenWxtJbh2JumSnv8B_RURGAo
+
+### unvalidated GET
+GET http://localhost:3000/chat
