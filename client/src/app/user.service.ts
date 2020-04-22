@@ -17,4 +17,13 @@ export class UserService {
     };
     return this.http.post(`${this.baseURL}/login`, data);
   }
+
+  signupUser(name, email, password) {
+    const data = {
+      name: name,
+      email: email,
+      password: password
+    };
+    return this.http.post(`${this.baseURL}/signup`, data);
+  }
 }
