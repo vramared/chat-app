@@ -10,7 +10,7 @@ const saltRounds = 10;
 const httpResp = {
     userDNE: "User does not exist",
     loginSucess: "Login Succeeded",
-    loginFail: "Login Unsuccesful"
+    loginFail: "Incorrect Password"
 };
 
 var genHash = async function(password) {
@@ -44,7 +44,12 @@ router.post('/signup', async (req, res) => {
     });
     try {
         const savedUser = await user.save();
-        res.send(savedUser);
+        const token = jwt.sign({ _id: savedUser.id }, process.env.TOKEN_SECRET);
+        res.header('auth-token', token);
+        res.send(JSON.stringify({
+            token: token,
+            user: savedUser
+        }));
     } catch (err) {
         res.status(400).send(err.errmsg);
     }

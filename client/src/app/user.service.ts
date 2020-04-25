@@ -26,4 +26,10 @@ export class UserService {
     };
     return this.http.post(`${this.baseURL}/signup`, data);
   }
+
+  tokenExists() {
+    const token = localStorage.getItem('token');
+    if(token) return true;
+    return false;
+  }
 }

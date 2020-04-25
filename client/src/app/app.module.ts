@@ -9,20 +9,25 @@ import { LoginComponent } from './components/login/login.component';
 
 import { UserService } from './user.service';
 import { SignupComponent } from './components/signup/signup.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
+import { AuthGuard } from './auth.guard';
+import { RedirectGuard } from './redirect.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard, RedirectGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
