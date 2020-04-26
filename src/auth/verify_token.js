@@ -6,8 +6,8 @@ const httpResp = {
 }
 
 var verifyToken = function(req, res, next) {
-    const token = req.header("auth-token");
-    if(!token) return res.status(401).send(httpResp.accessDenied);
+    if(!req.headers.authorization) return res.status(401).send(httpResp.accessDenied);
+    const token = req.headers.authorization.split(' ')[1];
     try {
         const verify = jwt.verify(token, process.env.TOKEN_SECRET);
         req.user = verify;
