@@ -10,10 +10,12 @@ import { ChatService } from '../../chat.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  data = {};
+  data: any;
   constructor(private userService : UserService,
               private chatService : ChatService, 
-              private router : Router) { }
+              private router : Router) { 
+                this.data = {};
+              }
 
   ngOnInit(): void {
     this.chatService.getChats().subscribe(
