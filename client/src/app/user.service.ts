@@ -32,4 +32,12 @@ export class UserService {
     if(token) return true;
     return false;
   }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  deleteToken() {
+    localStorage.removeItem('token');
+  }
 }
