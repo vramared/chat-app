@@ -1,3 +1,3 @@
 web: cd server
-web: npm install
+web: npm install --production
 web: npm start
