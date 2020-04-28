@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-if (process.env.NODE_ENV == "dev") {
-    require("dotenv").config();
+const mongoose = require('mongoose');
+if (process.env.NODE_ENV == 'dev') {
+    require('dotenv').config();
 }
 
 // Connect to DB
@@ -12,6 +12,6 @@ mongoose.connect(
         useCreateIndex: true,
     },
     () => {
-        console.log("Connected to DB");
+        console.log('Connected to DB');
     }
 );
