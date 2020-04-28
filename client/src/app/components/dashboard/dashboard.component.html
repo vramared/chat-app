@@ -1,3 +1,9 @@
 <h1>The Date is {{ data.date }}</h1>
 <h2>{{ data.msg }}</h2>
-<button (click)="logoutUser()" routerLinkActive="router-link-active">Logout</button>
+<form (submit)="sendMsg($event)">
+    <input type="text" placeholder="send a message" id="msg" />
+    <input type="submit" value="Submit" />
+</form>
+<button (click)="logoutUser()" routerLinkActive="router-link-active">
+    Logout
+</button>

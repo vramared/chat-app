@@ -1,15 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as io from 'socket.io-client';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class ChatService {
-  readonly baseURL = "http://localhost:3000";
+    readonly baseURL = 'http://localhost:3000';
 
-  constructor(private http : HttpClient) { }
+    constructor(private http: HttpClient) {}
 
-  getChats() {
-    return this.http.get(`${this.baseURL}/chat`);
-  }
+    socket: any;
+
+    getChats() {
+        return this.http.get(`${this.baseURL}/chat`);
+    }
+
+    sendMsg(msg) {
+        this.socket.emit('chat', msg);
+    }
+
+    getMsg() {
+        this.socket.on('chat', (msg) => {
+            console.log(msg);
+        });
+    }
+
+    setupSocketConnection() {
+        this.socket = io(this.baseURL, {
+            path: '/chat',
+        });
+    }
 }

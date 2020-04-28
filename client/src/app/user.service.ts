@@ -8,7 +8,7 @@ export class UserService {
 
   readonly baseURL = "http://localhost:3000";
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   loginUser(email, password) {
     const data = {

@@ -8,7 +8,7 @@ import { HttpInterceptor } from '@angular/common/http';
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor(private userService : UserService) { }
+  constructor(private userService: UserService) { }
 
   intercept(req, next) {
     let tokenizedReq = req.clone({
