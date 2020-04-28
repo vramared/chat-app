@@ -4,6 +4,7 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http, { path: '/chat' });
 var cors = require('cors');
 
+// Connect to MongoDB 
 require('./db/mongoose');
 
 const auth = require('./routes/login');
@@ -18,7 +19,7 @@ app.use(auth);
 app.use(chat);
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Chat App Backend');
 });
 
 io.on('connection', (socket) => {
