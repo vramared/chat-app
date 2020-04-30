@@ -11,6 +11,8 @@ import { ChatService } from '../../chat.service';
 })
 export class DashboardComponent implements OnInit {
     data: any;
+    messages = [];
+
     constructor(
         private userService: UserService,
         private chatService: ChatService,
@@ -25,13 +27,20 @@ export class DashboardComponent implements OnInit {
             (err) => this.logoutUser()
         );
         this.chatService.setupSocketConnection();
+        this.chatService.getMsg();
+    }
+
+    showMsg(msg) {
+        this.messages.push(msg);
     }
 
     sendMsg(event) {
         event.preventDefault();
-        const msg = event.target.querySelector('#msg').value;
+        const form = event.target.querySelector('#msg');
+        const msg = form.value;
         this.chatService.sendMsg(msg);
-        this.chatService.getMsg();
+        this.showMsg(msg);
+        form.value = '';
     }
 
     logoutUser() {
