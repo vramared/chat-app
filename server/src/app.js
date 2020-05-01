@@ -32,7 +32,6 @@ io.on('connection', (socket) => {
 });
 
 io.use((socket, next) => {
-    console.log('validate socket here');
     next();
 });
 

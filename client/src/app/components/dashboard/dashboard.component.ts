@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 import { UserService } from '../../user.service';
 import { ChatService } from '../../chat.service';
+import { NodeWithI18n } from '@angular/compiler';
 
 @Component({
     selector: 'app-dashboard',
@@ -27,7 +29,7 @@ export class DashboardComponent implements OnInit {
             (err) => this.logoutUser()
         );
         this.chatService.setupSocketConnection();
-        this.chatService.getMsg();
+        this.chatService.getMsg(this.showMsg.bind(this));
     }
 
     showMsg(msg) {
@@ -37,7 +39,12 @@ export class DashboardComponent implements OnInit {
     sendMsg(event) {
         event.preventDefault();
         const form = event.target.querySelector('#msg');
-        const msg = form.value;
+        const text = form.value;
+        const msg = {
+            text: text,
+            sender: this.data.name,
+            time: Date.now(),
+        };
         this.chatService.sendMsg(msg);
         this.showMsg(msg);
         form.value = '';

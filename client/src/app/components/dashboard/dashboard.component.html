@@ -1,5 +1,5 @@
 <h1>Welcome {{ data.name }}</h1>
-<h2>The Date is {{ data.date }}</h2>
+<h2>The Date is {{ data.date | date: 'longDate' }}</h2>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,14 +27,15 @@
             </ul>
         </div>
         <div class="chat-messages">
-            <!-- <div class="message">
-                <p class="meta">Brad <span>9:12pm</span></p>
-                <p class="text">
-                    Hey, you free Sunday?
-                </p>
-            </div> -->
             <div class="message" *ngFor="let message of messages">
-                <p>{{ message }}</p>
+                <p class="meta">
+                    {{ message.sender }}
+                    <span>{{ message.time | date: 'shortTime' }}</span>
+                </p>
+
+                <p class="text">
+                    {{ message.text }}
+                </p>
             </div>
         </div>
     </main>
