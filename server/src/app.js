@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server, { path: '/chat' });
-var verifyToken = require('./auth/verify_token');
 var cors = require('cors');
 
 // Connect to MongoDB
@@ -23,16 +22,6 @@ app.get('/', (req, res) => {
     res.send('Chat App Backend');
 });
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
-    chat.handleChat(socket, io);
-    socket.on('disconnect', () => {
-        console.log('a user disconnected');
-    });
-});
-
-io.use((socket, next) => {
-    next();
-});
+chat.socketConnection(io);
 
 server.listen(port, () => console.log(`Server listening on port: ${port}`));

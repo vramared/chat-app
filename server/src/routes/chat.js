@@ -4,6 +4,16 @@ const verifyToken = require('../auth/verify_token');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 
+const socketConnection = function (io) {
+    io.on('connection', (socket) => {
+        console.log('a user connected');
+        handleChat(socket, io);
+        socket.on('disconnect', () => {
+            console.log('a user disconnected');
+        });
+    });
+};
+
 const handleChat = function (socket, io) {
     socket.on('chat', (msg) => {
         console.log(msg);
@@ -23,4 +33,4 @@ router.get('/chat', verifyToken, async (req, res) => {
 });
 
 module.exports.router = router;
-module.exports.handleChat = handleChat;
+module.exports.socketConnection = socketConnection;
