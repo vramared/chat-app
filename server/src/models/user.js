@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
     },
     email: {
         type: String,
@@ -17,7 +17,14 @@ const UserSchema = new mongoose.Schema({
         required: true,
         trim: true,
         minlength: 8,
-    }
+    },
+    chats: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Chat',
+            required: false,
+        },
+    ],
 });
 
 const User = mongoose.model('User', UserSchema);
