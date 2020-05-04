@@ -1,14 +1,14 @@
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io')(server, { path: '/chat' });
+var io = require('socket.io')(server, { path: '/dashboard' });
 var cors = require('cors');
 
 // Connect to MongoDB
 require('./db/mongoose');
 
 const auth = require('./routes/login');
-const chat = require('./routes/chat');
+const chat = require('./routes/dashboard');
 
 var port = process.env.PORT || 3000;
 

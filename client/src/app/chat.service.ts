@@ -13,7 +13,7 @@ export class ChatService {
     socket: any;
 
     getChats() {
-        return this.http.get(`${this.baseURL}/chat`);
+        return this.http.get(`${this.baseURL}/dashboard`);
     }
 
     sendMsg(msg) {
@@ -28,7 +28,7 @@ export class ChatService {
 
     setupSocketConnection() {
         this.socket = io(this.baseURL, {
-            path: '/chat',
+            path: '/dashboard',
         });
     }
 }
