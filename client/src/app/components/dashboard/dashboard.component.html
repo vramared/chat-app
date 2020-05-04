@@ -54,6 +54,14 @@
         </form>
     </div>
 </div>
+<div class="chats-available">
+    Your Chats:
+    <div class="chat-button" *ngFor="let chat of data.chats">
+        <button (click)="openChat(chat)" routerLinkActive="router-link-active">
+            {{ chat }}
+        </button>
+    </div>
+</div>
 <button (click)="logoutUser()" routerLinkActive="router-link-active">
     Logout
 </button>

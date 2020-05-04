@@ -32,11 +32,13 @@ router.get('/dashboard', verifyToken, async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
     const user = await User.findById(decoded._id);
-    const info = {
+    console.log(user);
+    const chat_data = {
         name: user.name,
         date: Date.now(),
+        chats: user.chats,
     };
-    res.send(info);
+    res.send(chat_data);
 });
 
 router.get('/dashboard/:id', verifyToken, async (req, res) => {
@@ -51,12 +53,13 @@ router.get('/dashboard/:id', verifyToken, async (req, res) => {
 
 router.post('/create-chat', async (req, res) => {
     member_ids = await utils.findUsers(req.body.members);
+    console.log(member_ids);
     const chat = new Chat({
         members: member_ids,
     });
     try {
         const savedChat = await chat.save();
-        User.updateMany(
+        await User.updateMany(
             { _id: { $in: member_ids } },
             { $push: { chats: savedChat._id } }
         );

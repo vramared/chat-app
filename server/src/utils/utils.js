@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 // Given an array of user emails, returns array of user ids
 const findUsers = async function (members) {
     member_ids = [];

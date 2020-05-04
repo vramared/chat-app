@@ -4,6 +4,9 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server, { path: '/dashboard' });
 var cors = require('cors');
 
+// tmp
+var dev = require('./dev/dev_cmd');
+
 // Connect to MongoDB
 require('./db/mongoose');
 
@@ -17,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(auth);
 app.use(chat.router);
+app.use(dev);
 
 app.get('/', (req, res) => {
     res.send('Chat App Backend');

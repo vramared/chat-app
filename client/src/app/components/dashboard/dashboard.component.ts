@@ -50,6 +50,10 @@ export class DashboardComponent implements OnInit {
         form.value = '';
     }
 
+    openChat(chat_id) {
+        this.router.navigate([`/dashboard/${chat_id}`]);
+    }
+
     logoutUser() {
         this.userService.deleteToken();
         this.router.navigate(['/']);
