@@ -26,7 +26,6 @@ export class ChatService {
 
     getMsg(showMsg) {
         this.socket.on('chat', (msg) => {
-            console.log(msg);
             showMsg(msg);
         });
     }

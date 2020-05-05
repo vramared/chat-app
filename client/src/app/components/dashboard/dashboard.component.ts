@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit {
     }
 
     openChat(chat_id) {
-        this.chatService.joinRoom(chat_id);
         this.router.navigate([`/dashboard/${chat_id}`]);
     }
 
