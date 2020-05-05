@@ -15,16 +15,26 @@ const socketConnection = function (io) {
     io.on('connection', (socket) => {
         console.log('a user connected');
         handleChat(socket, io);
+        socket.on('join-room', (room) => {
+            socket.join(room);
+            console.log(`joined room: ${room}`);
+        });
         socket.on('disconnect', () => {
             console.log('a user disconnected');
         });
     });
 };
 
-const handleChat = function (socket, io) {
+const handleChat = function (socket) {
     socket.on('chat', (msg) => {
         console.log(msg);
-        socket.broadcast.emit('chat', msg);
+        if (msg.chat_id) {
+            console.log('outputting to a room');
+            socket.to(msg.chat_id).emit('chat', msg);
+            // socket.to(msg.chat_id).emit('chat', msg);
+        } else {
+            socket.broadcast.emit('chat', msg);
+        }
     });
 };
 
@@ -32,7 +42,6 @@ router.get('/dashboard', verifyToken, async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
     const user = await User.findById(decoded._id);
-    console.log(user);
     const chat_data = {
         name: user.name,
         date: Date.now(),

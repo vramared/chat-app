@@ -16,12 +16,17 @@ export class ChatService {
         return this.http.get(`${this.baseURL}/dashboard`);
     }
 
+    joinRoom(room) {
+        this.socket.emit('join-room', room);
+    }
+
     sendMsg(msg) {
         this.socket.emit('chat', msg);
     }
 
     getMsg(showMsg) {
         this.socket.on('chat', (msg) => {
+            console.log(msg);
             showMsg(msg);
         });
     }
