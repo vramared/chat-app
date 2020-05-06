@@ -28,26 +28,6 @@ export class DashboardComponent implements OnInit {
             (res) => (this.data = res),
             (err) => this.logoutUser()
         );
-        this.chatService.setupSocketConnection();
-        this.chatService.getMsg(this.showMsg.bind(this));
-    }
-
-    showMsg(msg) {
-        this.messages.push(msg);
-    }
-
-    sendMsg(event) {
-        event.preventDefault();
-        const form = event.target.querySelector('#msg');
-        const text = form.value;
-        const msg = {
-            text: text,
-            sender: this.data.name,
-            time: Date.now(),
-        };
-        this.chatService.sendMsg(msg);
-        this.showMsg(msg);
-        form.value = '';
     }
 
     openChat(chat_id) {
