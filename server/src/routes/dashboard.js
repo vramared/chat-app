@@ -1,12 +1,9 @@
 const express = require('express');
 const router = new express.Router();
-
 const utils = require('../utils/utils');
-
 // Token
 const verifyToken = require('../auth/verify_token');
 const jwt = require('jsonwebtoken');
-
 // DB models
 const User = require('../models/user');
 const Chat = require('../models/chat_model');

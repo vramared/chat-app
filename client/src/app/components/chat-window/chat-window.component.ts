@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChatService } from '../../chat.service';
 
@@ -8,9 +8,9 @@ import { ChatService } from '../../chat.service';
     styleUrls: ['./chat-window.component.css'],
 })
 export class ChatWindowComponent implements OnInit {
-    data = {
-        name: 'Vineet',
-    };
+    @ViewChild('scrollBottom') private scrollBottom: ElementRef;
+
+    data: any;
     messages = [];
     id: any;
 
@@ -19,12 +19,14 @@ export class ChatWindowComponent implements OnInit {
     ngOnInit(): void {
         var endpoints = this.router.url.split('/');
         this.id = endpoints[endpoints.length - 1];
+        this.chatService.getChats().subscribe((res) => (this.data = res));
         this.chatService.joinRoom(this.id);
         this.chatService.getMsg(this.showMsg.bind(this));
     }
 
     showMsg(msg) {
         this.messages.push(msg);
+        this.scrollToBottom();
     }
 
     sendMsg(event) {
@@ -40,6 +42,11 @@ export class ChatWindowComponent implements OnInit {
         this.chatService.sendMsg(msg);
         this.showMsg(msg);
         form.value = '';
+    }
+
+    scrollToBottom() {
+        console.log(this.scrollBottom.nativeElement.scrollHeight);
+        this.scrollBottom.nativeElement.scrollTop = this.scrollBottom.nativeElement.scrollHeight;
     }
 
     navigateBack() {
