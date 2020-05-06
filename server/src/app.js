@@ -12,20 +12,22 @@ require('./db/mongoose');
 
 const auth = require('./routes/login');
 const chat = require('./routes/dashboard');
+const socketConnection = require('./socket/socket');
 
 var port = process.env.PORT || 3000;
 
 app.use(cors());
 
+// Middlewares
 app.use(express.json());
 app.use(auth);
-app.use(chat.router);
+app.use(chat);
 app.use(dev);
 
 app.get('/', (req, res) => {
     res.send('Chat App Backend');
 });
 
-chat.socketConnection(io);
+socketConnection(io);
 
 server.listen(port, () => console.log(`Server listening on port: ${port}`));

@@ -3,45 +3,13 @@ const router = new express.Router();
 
 const utils = require('../utils/utils');
 
-// Tokens
+// Token
 const verifyToken = require('../auth/verify_token');
 const jwt = require('jsonwebtoken');
 
 // DB models
 const User = require('../models/user');
 const Chat = require('../models/chat_model');
-
-const socketConnection = function (io) {
-    io.on('connection', (socket) => {
-        console.log(`a user connected: ${socket.id}`);
-        handleChat(socket, io);
-        socket.on('join-room', (room) => {
-            socket.join(room);
-            console.log(`joined room: ${room}`);
-        });
-        socket.on('leave-room', (room) => {
-            socket.leave(room);
-            console.log(`left room: ${room}`);
-        });
-        socket.on('disconnect', () => {
-            console.log(`a user disconnected: ${socket.id}`);
-            socket.removeAllListeners();
-        });
-    });
-};
-
-const handleChat = function (socket) {
-    socket.on('chat', (msg) => {
-        console.log(msg);
-        if (msg.chat_id) {
-            console.log('outputting to a room');
-            socket.to(msg.chat_id).emit('chat', msg);
-            // socket.to(msg.chat_id).emit('chat', msg);
-        } else {
-            socket.broadcast.emit('chat', msg);
-        }
-    });
-};
 
 router.get('/dashboard', verifyToken, async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
@@ -83,5 +51,4 @@ router.post('/create-chat', async (req, res) => {
     }
 });
 
-module.exports.router = router;
-module.exports.socketConnection = socketConnection;
+module.exports = router;
