@@ -13,14 +13,19 @@ const Chat = require('../models/chat_model');
 
 const socketConnection = function (io) {
     io.on('connection', (socket) => {
-        console.log('a user connected');
+        console.log(`a user connected: ${socket.id}`);
         handleChat(socket, io);
         socket.on('join-room', (room) => {
             socket.join(room);
             console.log(`joined room: ${room}`);
         });
+        socket.on('leave-room', (room) => {
+            socket.leave(room);
+            console.log(`left room: ${room}`);
+        });
         socket.on('disconnect', () => {
-            console.log('a user disconnected');
+            console.log(`a user disconnected: ${socket.id}`);
+            socket.removeAllListeners();
         });
     });
 };

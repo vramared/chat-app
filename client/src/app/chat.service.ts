@@ -8,7 +8,9 @@ import * as io from 'socket.io-client';
 export class ChatService {
     readonly baseURL = 'http://localhost:3000';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        this.setupSocketConnection();
+    }
 
     socket: any;
 
@@ -18,6 +20,10 @@ export class ChatService {
 
     joinRoom(room) {
         this.socket.emit('join-room', room);
+    }
+
+    leaveRoom(room) {
+        this.socket.emit('leave-room', room);
     }
 
     sendMsg(msg) {
@@ -34,5 +40,13 @@ export class ChatService {
         this.socket = io(this.baseURL, {
             path: '/dashboard',
         });
+    }
+
+    destroy() {
+        if (this.socket) {
+            this.socket.removeAllListeners();
+            this.socket.close();
+            this.socket = undefined;
+        }
     }
 }

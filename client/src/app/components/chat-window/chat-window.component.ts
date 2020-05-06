@@ -19,13 +19,11 @@ export class ChatWindowComponent implements OnInit {
     ngOnInit(): void {
         var endpoints = this.router.url.split('/');
         this.id = endpoints[endpoints.length - 1];
-        this.chatService.setupSocketConnection();
         this.chatService.joinRoom(this.id);
         this.chatService.getMsg(this.showMsg.bind(this));
     }
 
     showMsg(msg) {
-        console.log('is this getting called');
         this.messages.push(msg);
     }
 
@@ -39,9 +37,17 @@ export class ChatWindowComponent implements OnInit {
             time: Date.now(),
             chat_id: this.id,
         };
-        // TODO: figure out message sending
         this.chatService.sendMsg(msg);
         this.showMsg(msg);
         form.value = '';
+    }
+
+    navigateBack() {
+        this.chatService.leaveRoom(this.id);
+        this.router.navigate(['/dashboard']);
+    }
+
+    ngOnDestroy() {
+        this.chatService.destroy();
     }
 }
