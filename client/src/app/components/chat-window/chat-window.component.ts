@@ -46,8 +46,4 @@ export class ChatWindowComponent implements OnInit {
         this.chatService.leaveRoom(this.id);
         this.router.navigate(['/dashboard']);
     }
-
-    ngOnDestroy() {
-        this.chatService.destroy();
-    }
 }

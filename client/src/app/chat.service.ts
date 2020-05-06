@@ -41,12 +41,4 @@ export class ChatService {
             path: '/dashboard',
         });
     }
-
-    destroy() {
-        if (this.socket) {
-            this.socket.removeAllListeners();
-            this.socket.close();
-            this.socket = undefined;
-        }
-    }
 }
