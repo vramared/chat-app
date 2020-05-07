@@ -11,7 +11,7 @@ var dev = require('./dev/dev_cmd');
 require('./db/mongoose');
 
 const auth = require('./routes/login');
-const chat = require('./routes/dashboard');
+const chat = require('./routes/chat');
 const socketConnection = require('./socket/socket');
 
 var port = process.env.PORT || 3000;

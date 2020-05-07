@@ -13,6 +13,7 @@ export class ChatWindowComponent implements OnInit {
     data: any;
     messages = [];
     id: any;
+    members;
 
     constructor(private chatService: ChatService, private router: Router) {}
 
@@ -20,6 +21,10 @@ export class ChatWindowComponent implements OnInit {
         var endpoints = this.router.url.split('/');
         this.id = endpoints[endpoints.length - 1];
         this.chatService.getChats().subscribe((res) => (this.data = res));
+        this.chatService.getChatInfo(this.id).subscribe(
+            (res) => (this.members = res),
+            (err) => console.log(err)
+        );
         this.chatService.joinRoom(this.id);
         this.chatService.getMsg(this.showMsg.bind(this));
     }

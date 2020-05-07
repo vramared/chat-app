@@ -18,6 +18,10 @@ export class ChatService {
         return this.http.get(`${this.baseURL}/dashboard`);
     }
 
+    getChatInfo(id) {
+        return this.http.get(`${this.baseURL}/chat-info/${id}`);
+    }
+
     joinRoom(room) {
         this.socket.emit('join-room', room);
     }

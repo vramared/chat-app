@@ -20,7 +20,7 @@ router.get('/dashboard', verifyToken, async (req, res) => {
     res.send(chat_data);
 });
 
-router.get('/dashboard/:id', verifyToken, async (req, res) => {
+router.get('/chat-info/:id', verifyToken, async (req, res) => {
     const chat = await Chat.findById(req.params.id);
     users = [];
     for (const member of chat.members) {
@@ -30,7 +30,7 @@ router.get('/dashboard/:id', verifyToken, async (req, res) => {
     res.send(users);
 });
 
-router.post('/create-chat', async (req, res) => {
+router.post('/create-chat', verifyToken, async (req, res) => {
     member_ids = await utils.findUsers(req.body.members);
     console.log(member_ids);
     const chat = new Chat({
