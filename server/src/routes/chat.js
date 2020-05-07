@@ -30,7 +30,7 @@ router.get('/chat-info/:id', verifyToken, async (req, res) => {
     res.send(users);
 });
 
-router.post('/create-chat', verifyToken, async (req, res) => {
+router.post('/create-chat', async (req, res) => {
     member_ids = await utils.findUsers(req.body.members);
     console.log(member_ids);
     const chat = new Chat({
