@@ -10,7 +10,6 @@ const socketConnection = function (io) {
 
 const handleChat = function (socket) {
     socket.on('chat', (msg) => {
-        console.log(msg);
         socket.to(msg.chat_id).emit('chat', msg);
     });
 };

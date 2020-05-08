@@ -1,0 +1,50 @@
+### Production Server Calls
+
+### login an existing user
+POST http://web-app-liverton.herokuapp.com/login
+Content-Type: application/json
+
+{
+    "email": "ace@gmail.com",
+    "password": "password"
+}
+
+### signup an existing user
+POST http://web-app-liverton.herokuapp.com/signup
+Content-Type: application/json
+
+{
+    "name": "Vineet Ramareddi",
+    "email": "vin@gmail.com",
+    "password": "password"
+}
+
+### Local Server Calls
+
+### login an existing user
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "ace@gmail.com",
+    "password": "password"
+}
+
+### create a chat
+POST http://localhost:3000/create-chat
+Content-Type: application/json
+
+{
+    "members": [
+        "ace@gmail.com",
+        "dumas@gmail.com",
+        "vin@gmail.com"
+    ]
+}
+
+### clear chats
+POST http://localhost:3000/clear-chats
+Content-Type: application/json
+
+{
+}
